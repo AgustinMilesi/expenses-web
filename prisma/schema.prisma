@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String           @id @default(cuid())
+  email          String           @unique
+  name           String
+  passwordHash   String
+  membershipTier String           @default("standard")
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  sessions       Session[]
+  budget         Budget?
+  expenses       Expense[]
+  extraIncomes   ExtraIncome[]
+  preferences    UserPreferences?
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("sessions")
+}
+
+model Budget {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  monthlyNetIncome Float    @default(0)
+  incomeType       String   @default("fixed")
+  startingBalance  Float    @default(0)
+  currency         String   @default("USD")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("budgets")
+}
+
+model Expense {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  amount    Float
+  category  String
+  dueDate   Int?
+  isPaid    Boolean   @default(false)
+  paidAt    DateTime?
+  iconName  String?
+  notes     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("expenses")
+}
+
+model ExtraIncome {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  amount    Float
+  date      String
+  createdAt DateTime @default(now())
+
+  @@map("extra_incomes")
+}
+
+model UserPreferences {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currency  String   @default("USD")
+  theme     String   @default("dark")
+  accent    String   @default("lime")
+  locale    String   @default("es")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_preferences")
+}

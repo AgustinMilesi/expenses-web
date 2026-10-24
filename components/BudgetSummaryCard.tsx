@@ -35,9 +35,6 @@ export function BudgetSummaryCard({
 
   return (
     <div className="vout-card p-6 relative overflow-hidden bg-gradient-to-br from-[#121824] via-[#101620] to-[#0D121A] border-[#1E293B] shadow-xl">
-      {/* Glow orb */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-[#C6F827]/5 rounded-full blur-3xl pointer-events-none" />
-
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1E293B]/80">
         <div>

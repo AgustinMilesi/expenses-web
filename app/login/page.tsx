@@ -41,13 +41,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#0A0E14] relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#C6F827]/10 rounded-full blur-3xl pointer-events-none" />
-
       <div className="vout-card w-full max-w-md p-8 bg-[#121824] border-[#1E293B] shadow-2xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C6F827] to-[#10B981] flex items-center justify-center font-black text-black text-2xl shadow-[0_0_20px_rgba(198,248,39,0.35)] mx-auto mb-3">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C6F827] to-[#10B981] flex items-center justify-center font-black text-black text-2xl shadow-sm mx-auto mb-3">
             V
           </div>
           <h1 className="text-2xl font-black text-white tracking-tight">

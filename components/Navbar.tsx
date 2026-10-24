@@ -45,7 +45,7 @@ export function Navbar({
         {/* Brand */}
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C6F827] to-[#10B981] flex items-center justify-center font-black text-black text-xl shadow-[0_0_15px_rgba(198,248,39,0.3)] transition-transform group-hover:scale-105">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C6F827] to-[#10B981] flex items-center justify-center font-black text-black text-xl shadow-sm transition-transform group-hover:scale-105">
               V
             </div>
             <div className="flex flex-col">

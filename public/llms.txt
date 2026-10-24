@@ -1,0 +1,23 @@
+# VOUT Web · Personal Finance & Bi-Directional Cloud Hub
+> Web companion and cloud synchronization engine for VOUT Mobile Expense Tracker.
+
+## Overview
+VOUT is a personal finance ecosystem built for disciplined budgeting, recurring subscription auditing, and real-time disposable income tracking ("Safe to Spend").
+
+## System Capabilities
+- Bi-directional sync between Next.js Web and React Native Mobile
+- Isolated multi-user PostgreSQL storage on Neon Cloud (`vout` schema)
+- Fixed bills, subscription cycle tracking, and micro-expense logging
+- Offline-first mobile synchronization via `/api/sync` (Bearer token auth)
+
+## Live URLs
+- Web Hub: https://vout-web.vercel.app
+- Mobile APK Download: https://github.com/AgustinMilesi/expenses/releases/latest/download/VOUT.apk
+- Mobile Repository: https://github.com/AgustinMilesi/expenses
+- Web Repository: https://github.com/AgustinMilesi/expenses-web
+
+## Architecture
+- Next.js 16 + React 19 + Turbopack + Tailwind CSS v4
+- Prisma ORM 6 + Neon Serverless PostgreSQL
+- Cyber-Lime (#C6F827) and Deep Obsidian (#0A0E14) UI token system
+- Creator: Agustín Milesi (https://github.com/AgustinMilesi)

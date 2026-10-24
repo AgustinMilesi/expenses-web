@@ -127,7 +127,7 @@ export default function DashboardPage() {
             if (syncData.budget) {
               setBudget({
                 monthlyNetIncome: syncData.budget.monthlyNetIncome || 0,
-                incomeType: (syncData.budget.incomeType as any) || "fixed",
+                incomeType: (syncData.budget.incomeType === "variable" ? "variable" : "fixed"),
                 startingBalance: syncData.budget.startingBalance || 0,
                 currency: syncData.budget.currency || "ARS",
               });

@@ -102,7 +102,7 @@ export function FixedBillsSection({
         <div className="p-8 rounded-xl bg-[#0A0E14]/50 border border-dashed border-[#1E293B] text-center">
           <p className="text-slate-400 text-sm mb-2">No tienes gastos fijos cargados este mes.</p>
           <p className="text-xs text-slate-500">
-            Usa los presets de arriba o el botón "+ Agregar Fijo" para registrar alquiler, luz, internet, etc.
+            Usa los presets de arriba o el botón &quot;+ Agregar Fijo&quot; para registrar alquiler, luz, internet, etc.
           </p>
         </div>
       ) : (

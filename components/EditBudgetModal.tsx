@@ -19,7 +19,7 @@ export function EditBudgetModal({
   onSave,
 }: EditBudgetModalProps) {
   const [income, setIncome] = useState(currentIncome.toString());
-  const [type, setType] = useState<"fixed" | "variable">(currentType as any || "fixed");
+  const [type, setType] = useState<"fixed" | "variable">(currentType === "variable" ? "variable" : "fixed");
 
   if (!isOpen) return null;
 

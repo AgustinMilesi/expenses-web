@@ -155,7 +155,7 @@ export async function POST(req: Request) {
       preferences: savedPrefs,
       lastSyncAt: new Date().toISOString(),
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Sync error:", error);
     return NextResponse.json(
       { error: "Error procesando sincronización en la nube" },

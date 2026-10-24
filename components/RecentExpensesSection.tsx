@@ -35,8 +35,8 @@ export function RecentExpensesSection({
           <div className="flex items-center gap-2">
             <span className="text-xl">☕</span>
             <h2 className="text-lg font-bold text-white tracking-tight">Micro-gastos & Salidas</h2>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-950/50 text-emerald-400 border border-emerald-900/40">
-              {items.length}
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-950/50 text-emerald-400 border border-emerald-900/40">
+              {items.length} {items.length === 1 ? "gasto" : "gastos"} · {symbol} {format(total)}
             </span>
           </div>
           <p className="text-xs text-slate-400 mt-1">

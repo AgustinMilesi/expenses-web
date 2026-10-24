@@ -77,15 +77,15 @@ export function AddExpenseModal({
             </label>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { id: "fixed", label: "🏠 Fijo / Servicio" },
-                { id: "subscription", label: "🔁 Suscripción" },
-                { id: "leisure", label: "🎉 Salida / Ocio" },
-                { id: "micro", label: "☕ Micro-gasto" },
+                { id: "fixed" as const, label: "🏠 Fijo / Servicio" },
+                { id: "subscription" as const, label: "🔁 Suscripción" },
+                { id: "leisure" as const, label: "🎉 Salida / Ocio" },
+                { id: "micro" as const, label: "☕ Micro-gasto" },
               ].map((c) => (
                 <button
                   type="button"
                   key={c.id}
-                  onClick={() => setCategory(c.id as any)}
+                  onClick={() => setCategory(c.id)}
                   className={`p-2.5 rounded-lg border text-xs font-bold transition-all text-left ${
                     category === c.id
                       ? "bg-[#C6F827]/10 border-[#C6F827] text-[#C6F827]"

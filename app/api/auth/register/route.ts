@@ -69,7 +69,7 @@ export async function POST(req: Request) {
       token,
       expiresAt,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Register error:", error);
     return NextResponse.json(
       { error: "Error interno al crear la cuenta" },

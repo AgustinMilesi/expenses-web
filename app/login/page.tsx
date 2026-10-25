@@ -63,6 +63,35 @@ export default function LoginPage() {
           </p>
         </div>
 
+        {/* Guest Demo Access */}
+        <div className="mb-6 p-4 rounded-2xl bg-[#0F1520] border border-[#1E293B] space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+              Acceso Rápido de Evaluación
+            </span>
+            <span className="text-[9px] font-black bg-[#C6F827] text-[#0A0E14] px-2 py-0.5 rounded-full font-mono">
+              1-CLICK DEMO
+            </span>
+          </div>
+          <p className="text-xs text-slate-400">
+            Probá el gestor de finanzas, gastos fijos y suscripciones con datos precargados sin registrarte.
+          </p>
+          <Link
+            href="/"
+            className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/15 hover:border-[#C6F827]/40 font-bold text-xs text-center block transition cursor-pointer"
+          >
+            🚀 Probar Demo en Vivo (Sin Iniciar Sesión) →
+          </Link>
+        </div>
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-[#1E293B] w-full" />
+          <span className="bg-[#121824] px-3 text-[10px] text-[#64748B] uppercase tracking-widest font-black shrink-0">
+            o con tu Cuenta VOUT
+          </span>
+          <div className="border-t border-[#1E293B] w-full" />
+        </div>
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

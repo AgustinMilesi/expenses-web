@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "VOUT Web · Personal Finance & Cloud Sync Hub",
     description:

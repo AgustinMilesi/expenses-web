@@ -89,7 +89,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-[#0A0E14] text-white min-h-screen selection:bg-[#C6F827] selection:text-black">
+      <body className="bg-[var(--bg-page)] fintech-dot-matrix text-white min-h-screen selection:bg-[#C6F827] selection:text-black transition-colors duration-200">
         <PreferencesProvider>
           {children}
         </PreferencesProvider>

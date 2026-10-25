@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
+import { PreferencesProvider } from "@/components/PreferencesProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -89,7 +90,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#0A0E14] text-white min-h-screen selection:bg-[#C6F827] selection:text-black">
-        {children}
+        <PreferencesProvider>
+          {children}
+        </PreferencesProvider>
         <Toaster
           position="bottom-right"
           toastOptions={{

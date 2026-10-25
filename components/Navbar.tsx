@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { usePreferences } from "@/components/PreferencesProvider";
+import { PreferencesControls } from "@/components/PreferencesControls";
 
 interface NavbarProps {
   user: {
@@ -66,6 +68,7 @@ export function Navbar({
 
         {/* Sync & User Actions */}
         <div className="flex items-center gap-3 sm:gap-4">
+          <PreferencesControls />
           {user && (
             <>
               {/* Cloud Sync Status Button */}

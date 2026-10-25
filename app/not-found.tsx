@@ -16,7 +16,7 @@ export default function NotFound() {
         <div className="pt-2">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#C6F827] to-[#10B981] text-[#0A0E14] font-black text-xs uppercase tracking-wider hover:brightness-110 transition shadow-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#C6F827] hover:bg-white text-[#0A0E14] font-black text-xs uppercase tracking-wider hover:brightness-110 transition shadow-sm"
           >
             <span>←</span> Volver al Dashboard
           </Link>

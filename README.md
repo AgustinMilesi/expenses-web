@@ -9,7 +9,7 @@
 [![Prisma ORM](https://img.shields.io/badge/Prisma-6.19-2D3748?style=for-the-badge&logo=prisma&logoColor=white&labelColor=0A0E14)](https://prisma.io)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon_Serverless-00E599?style=for-the-badge&logo=postgresql&logoColor=white&labelColor=0A0E14)](https://neon.tech)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-v4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white&labelColor=0A0E14)](https://tailwindcss.com)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAgustinMilesi%2Fexpenses-web&env=DATABASE_URL,AUTH_SECRET&project-name=vout-web&repository-name=expenses-web)
+[![Proprietary](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge&labelColor=0A0E14)](https://vout-web.vercel.app)
 
 <p align="center">
   <strong>Versión Web oficial de VOUT con arquitectura full-stack, diseño Cyber-Lime obsidiana y sincronización bidireccional en la nube por cuenta de usuario.</strong>
@@ -58,6 +58,17 @@ La aplicación estará accesible en `http://localhost:3000`.
 
 ---
 
+## ⚖️ Licencia y Propiedad Intelectual
+
+**Copyright © 2026 Agustín Milesi. Todos los derechos reservados.**
+
+Este código fuente, modelos de datos, arquitectura y diseño son **software propietario y confidencial**.
+- Queda terminantemente prohibida su descarga, clonación, redistribución, sublicenciamiento o uso comercial sin autorización previa expresa por escrito.
+- La [demostración pública en vivo](https://vout-web.vercel.app) se ofrece únicamente para evaluación de la interfaz de usuario.
+- Consultas de licenciamiento privado o adquisición comercial: [Contacto](https://saas-am.vercel.app/contact).
+
+---
+
 <div align="center">
-  <p>© 2026 VOUT · Flagship Financial Design System.</p>
+  <p>© 2026 Agustín Milesi · VOUT Pocket · Personal Finance OS · All Rights Reserved</p>
 </div>

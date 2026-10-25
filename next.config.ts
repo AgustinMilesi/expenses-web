@@ -14,6 +14,7 @@ const apiCorsHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  productionBrowserSourceMaps: false,
   poweredByHeader: false,
   turbopack: {
     rules: {

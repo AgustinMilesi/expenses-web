@@ -63,24 +63,12 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Guest Demo Access */}
-        <div className="mb-6 p-4 rounded-2xl bg-[#0F1520] border border-[#1E293B] space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-              Acceso Rápido de Evaluación
-            </span>
-            <span className="text-[9px] font-black bg-[#C6F827] text-[#0A0E14] px-2 py-0.5 rounded-full font-mono">
-              1-CLICK DEMO
-            </span>
-          </div>
-          <p className="text-xs text-slate-400">
-            Probá el gestor de finanzas, gastos fijos y suscripciones con datos precargados sin registrarte.
-          </p>
+        <div className="mb-6">
           <Link
             href="/"
-            className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/15 hover:border-[#C6F827]/40 font-bold text-xs text-center block transition cursor-pointer"
+            className="w-full py-3 px-4 rounded-xl bg-[#C6F827] hover:bg-[#b0df1f] text-[#0A0E14] font-black text-xs text-center uppercase tracking-wider block transition shadow-md cursor-pointer"
           >
-            🚀 Probar Demo en Vivo (Sin Iniciar Sesión) →
+            🚀 Live Demo →
           </Link>
         </div>
 

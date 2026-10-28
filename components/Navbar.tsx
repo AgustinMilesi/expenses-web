@@ -42,12 +42,12 @@ export function Navbar({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#262626] bg-[#0c0c0c] shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full max-w-full border-b border-[#262626] bg-[#0c0c0c] shadow-[0_4px_24px_rgba(0,0,0,0.6)] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
         {/* Brand */}
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="size-9 rounded-[6px] bg-[#000000] border border-[#262626] flex items-center justify-center p-1.5 shadow-none transition-transform group-hover:scale-105">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group min-w-0">
+            <div className="size-8 sm:size-9 shrink-0 rounded-[6px] bg-[#000000] border border-[#262626] flex items-center justify-center p-1.5 shadow-none transition-transform group-hover:scale-105">
               <svg viewBox="68 106 416 310" className="w-full h-full" fill="none">
                 <rect x="68" y="228" width="60" height="60" rx="2" fill="#E5E5E5" />
                 <rect x="132" y="292" width="60" height="60" rx="2" fill="#E5E5E5" />
@@ -58,8 +58,8 @@ export function Navbar({
                 <rect x="452" y="106" width="32" height="32" rx="2" fill="#c5ff4a" />
               </svg>
             </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold tracking-tight text-lg text-white group-hover:text-[#c5ff4a] transition-colors leading-tight">
+            <div className="flex flex-col min-w-0">
+              <span className="font-extrabold tracking-tight text-base sm:text-lg text-white group-hover:text-[#c5ff4a] transition-colors leading-tight truncate">
                 VOUT <span className="text-[10px] font-mono uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-[3px] bg-[#000000] text-[#c5ff4a] border border-[#262626] ml-1">WEB</span>
               </span>
             </div>
@@ -67,7 +67,7 @@ export function Navbar({
         </div>
 
         {/* Sync & User Actions */}
-        <div className="flex items-center gap-2.5 sm:gap-3.5">
+        <div className="flex items-center gap-1.5 sm:gap-3.5 shrink-0">
           <PreferencesControls placement="down" />
           {user && (
             <>

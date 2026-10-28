@@ -1,7 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import { PreferencesProvider } from "@/components/PreferencesProvider";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#060606",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vout-web.vercel.app"),

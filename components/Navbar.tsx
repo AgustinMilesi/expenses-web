@@ -42,7 +42,7 @@ export function Navbar({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full max-w-full border-b border-[#262626] bg-[#0c0c0c] shadow-[0_4px_24px_rgba(0,0,0,0.6)] overflow-hidden">
+    <header className="sticky top-0 z-40 w-full max-w-full border-b border-[#262626] bg-[#0c0c0c] shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
         {/* Brand */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">

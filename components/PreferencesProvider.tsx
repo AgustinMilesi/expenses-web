@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import type { Locale, TranslationDict } from "@/lib/i18n";
 import { translations } from "@/lib/i18n";
 
@@ -8,7 +9,7 @@ export type Theme = "lime" | "mint" | "emerald" | "jade";
 export type Mode = "light" | "dark";
 
 export const THEMES: { id: Theme; name: string; colorClass: string; hex: string }[] = [
-  { id: "lime", name: "Cyber Lime", colorClass: "bg-[#c6f827]", hex: "#c6f827" },
+  { id: "lime", name: "Cyber Lime", colorClass: "bg-[#c5ff4a]", hex: "#c5ff4a" },
   { id: "mint", name: "Electric Mint", colorClass: "bg-[#00ff88]", hex: "#00ff88" },
   { id: "emerald", name: "Neon Emerald", colorClass: "bg-[#10b981]", hex: "#10b981" },
   { id: "jade", name: "Forest Jade", colorClass: "bg-[#059669]", hex: "#059669" },
@@ -35,50 +36,71 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
   const [locale, setLocaleState] = useState<Locale>("es");
   const [sound, setSoundState] = useState<boolean>(true);
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const router = useRouter();
+
+  const applyThemeColors = useCallback((t: Theme) => {
+    if (typeof document === "undefined") return;
+    const found = THEMES.find((item) => item.id === t) || THEMES[0];
+    const r = parseInt(found.hex.slice(1, 3), 16);
+    const g = parseInt(found.hex.slice(3, 5), 16);
+    const b = parseInt(found.hex.slice(5, 7), 16);
+    const isDarkAccent = t === "jade";
+
+    document.documentElement.setAttribute("data-theme", t);
+    document.documentElement.style.setProperty("--primary-accent", found.hex);
+    document.documentElement.style.setProperty("--primary-accent-hover", found.hex);
+    document.documentElement.style.setProperty("--primary-accent-rgb", `${r}, ${g}, ${b}`);
+    document.documentElement.style.setProperty("--primary-accent-shadow", `rgba(${r}, ${g}, ${b}, 0.35)`);
+    document.documentElement.style.setProperty("--primary-accent-text", isDarkAccent ? "#ffffff" : "#000000");
+  }, []);
+
+  const applyMode = useCallback((m: Mode) => {
+    if (typeof document === "undefined") return;
+    document.documentElement.setAttribute("data-mode", m);
+    if (m === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
 
   useEffect(() => {
     try {
       const savedMode = localStorage.getItem("pocket-mode") as Mode | null;
-      if (savedMode === "light" || savedMode === "dark") setModeState(savedMode);
+      if (savedMode === "light" || savedMode === "dark") {
+        setModeState(savedMode);
+        applyMode(savedMode);
+      }
       const savedTheme = localStorage.getItem("pocket-theme") as Theme | null;
-      if (savedTheme && THEMES.some((t) => t.id === savedTheme)) setThemeState(savedTheme);
+      if (savedTheme && THEMES.some((t) => t.id === savedTheme)) {
+        setThemeState(savedTheme);
+        applyThemeColors(savedTheme);
+      }
       const savedLocale = localStorage.getItem("pocket-locale") as Locale | null;
-      if (savedLocale && (["en", "es", "pt", "zh"] as const).includes(savedLocale)) setLocaleState(savedLocale);
+      if (savedLocale && (["en", "es", "pt", "zh"] as const).includes(savedLocale)) {
+        setLocaleState(savedLocale);
+      }
       const savedSound = localStorage.getItem("vout-sound");
       if (savedSound !== null) setSoundState(savedSound === "true");
     } catch {}
-  }, []);
+  }, [applyMode, applyThemeColors]);
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-mode", mode);
-      if (mode === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    }
-  }, [mode]);
+    applyMode(mode);
+  }, [mode, applyMode]);
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-theme", theme);
-    }
-  }, [theme]);
+    applyThemeColors(theme);
+  }, [theme, applyThemeColors]);
 
   const setMode = (newMode: Mode) => {
     setModeState(newMode);
     try {
       localStorage.setItem("pocket-mode", newMode);
     } catch {}
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-mode", newMode);
-      if (newMode === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    }
+    applyMode(newMode);
   };
 
   const setTheme = (newTheme: Theme) => {
@@ -86,15 +108,15 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
     try {
       localStorage.setItem("pocket-theme", newTheme);
     } catch {}
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-theme", newTheme);
-    }
+    applyThemeColors(newTheme);
   };
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
     try {
       localStorage.setItem("pocket-locale", newLocale);
+      document.cookie = `pocket-locale=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      router.refresh();
     } catch {}
   };
 

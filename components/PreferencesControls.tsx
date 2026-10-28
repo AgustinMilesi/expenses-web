@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePreferences, THEMES } from "@/components/PreferencesProvider";
 import { LOCALES } from "@/lib/i18n";
 
-export function PreferencesControls() {
+export function PreferencesControls({ placement = "down" }: { placement?: "up" | "down" }) {
   const { theme, setTheme, mode, setMode, locale, setLocale, sound, setSound, t } = usePreferences();
   const [open, setOpen] = useState(false);
 
@@ -22,7 +22,7 @@ export function PreferencesControls() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 text-xs uppercase tracking-wider text-[var(--text-muted,#7a7a7a)] hover:text-[var(--primary-accent,#c5ff4a)] transition-all py-1.5 px-3 rounded-[4px] bg-[#1f1f1f] border border-[#252525] shadow-none select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-accent,#c5ff4a)]"
+        className="flex items-center gap-2 text-xs font-sans text-[#a3a3a3] hover:text-white transition-all min-h-[40px] px-3 py-2 rounded-[6px] bg-[#161616] border border-[#262626] hover:border-[#383838] select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5ff4a] active:scale-[0.98]"
         title="Customization & Preferences"
         aria-label="Open preferences menu"
         aria-expanded={open}
@@ -30,7 +30,7 @@ export function PreferencesControls() {
       >
         {/* Mode icon */}
         {mode === "dark" ? (
-          <svg className="size-3.5 text-[var(--text-muted,#7a7a7a)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="size-4 text-[#a3a3a3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -39,7 +39,7 @@ export function PreferencesControls() {
             />
           </svg>
         ) : (
-          <svg className="size-3.5 text-[var(--text-muted,#7a7a7a)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="size-4 text-[#a3a3a3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -51,16 +51,18 @@ export function PreferencesControls() {
 
         {/* Color accent dot */}
         <span
-          className="size-2 rounded-full shadow-none ring-1 ring-white/20"
+          className="size-2.5 rounded-full ring-1 ring-white/20 shrink-0"
           style={{ backgroundColor: THEMES.find((x) => x.id === theme)?.hex }}
         />
 
         {/* Language code label */}
-        <span className="font-mono font-bold text-[11px] text-[var(--text-main,#FFFFFF)]">{locale.toUpperCase()}</span>
+        <span className="font-mono font-semibold text-xs text-white">{locale.toUpperCase()}</span>
 
-        {/* Chevron down */}
+        {/* Chevron */}
         <svg
-          className={`size-3 text-[var(--text-muted,#7a7a7a)] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`size-3 text-[#737373] transition-transform duration-200 ${
+            open ? (placement === "up" ? "-rotate-180" : "rotate-180") : ""
+          }`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -74,22 +76,24 @@ export function PreferencesControls() {
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div
             role="dialog"
-            aria-label="Preferences panel"
-            className="absolute right-0 top-full mt-2 w-64 p-4 rounded-[4px] bg-[#1f1f1f] border border-[#252525] shadow-none z-50 space-y-4 text-left"
+            aria-label="Panel de preferencias"
+            className={`absolute right-0 ${
+              placement === "up" ? "bottom-full mb-2" : "top-full mt-2"
+            } w-68 p-4 rounded-[6px] bg-[#121212] border border-[#262626] shadow-[0_16px_40px_rgba(0,0,0,0.85)] z-50 space-y-4 animate-smooth-in`}
           >
-            {/* Mode */}
+            {/* Mode selection: Claro / Oscuro */}
             <div>
-              <p className="text-[10px] font-sans font-medium uppercase tracking-[0.22em] text-[#7a7a7a] mb-2">
-                {t.mode}
+              <p className="text-[11px] font-sans font-medium text-[#737373] mb-2 uppercase tracking-wider">
+                {t.mode || "Aspecto"}
               </p>
-              <div className="grid grid-cols-2 gap-1.5 p-1 rounded-[4px] bg-[#161616] border border-[#252525]">
+              <div className="grid grid-cols-2 gap-1.5 p-1 rounded-[6px] bg-[#0a0a0a] border border-[#262626]">
                 <button
                   type="button"
                   onClick={() => setMode("light")}
-                  className={`flex items-center justify-center gap-2 py-1.5 px-3 rounded-[2px] text-xs font-sans font-medium uppercase tracking-[0.04em] transition-all cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 py-2 px-3 min-h-[38px] rounded-[4px] text-xs font-semibold transition-all cursor-pointer ${
                     mode === "light"
-                      ? "bg-[var(--primary-accent,#c5ff4a)] text-[#000000] shadow-none"
-                      : "text-[#7a7a7a] hover:text-[#FFFFFF]"
+                      ? "bg-[#c5ff4a] text-black shadow-xs font-bold"
+                      : "text-[#a3a3a3] hover:text-white hover:bg-[#1a1a1a]"
                   }`}
                 >
                   <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,15 +104,16 @@ export function PreferencesControls() {
                       d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                     />
                   </svg>
-                  <span>{t.lightMode}</span>
+                  <span>{t.lightMode || "Claro"}</span>
                 </button>
+
                 <button
                   type="button"
                   onClick={() => setMode("dark")}
-                  className={`flex items-center justify-center gap-2 py-1.5 px-3 rounded-[2px] text-xs font-sans font-medium uppercase tracking-[0.04em] transition-all cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 py-2 px-3 min-h-[38px] rounded-[4px] text-xs font-semibold transition-all cursor-pointer ${
                     mode === "dark"
-                      ? "bg-[var(--primary-accent,#c5ff4a)] text-[#000000] shadow-none"
-                      : "text-[#7a7a7a] hover:text-[#FFFFFF]"
+                      ? "bg-[#c5ff4a] text-black shadow-xs font-bold"
+                      : "text-[#a3a3a3] hover:text-white hover:bg-[#1a1a1a]"
                   }`}
                 >
                   <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,80 +124,75 @@ export function PreferencesControls() {
                       d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
                     />
                   </svg>
-                  <span>{t.darkMode}</span>
+                  <span>{t.darkMode || "Oscuro"}</span>
                 </button>
               </div>
             </div>
 
-            {/* Accent Color */}
-            <div>
-              <p className="text-[10px] font-sans font-medium uppercase tracking-[0.22em] text-[#7a7a7a] mb-2">
-                {t.accentColor}
+            {/* Color Accent Themes */}
+            <div className="border-t border-[#262626] pt-3">
+              <p className="text-[11px] font-sans font-medium text-[#737373] mb-2 uppercase tracking-wider">
+                {t.accentColor || "Color de Acento"}
               </p>
-              <div className="grid grid-cols-2 gap-2">
-                {THEMES.map((th) => (
+              <div className="flex items-center justify-between gap-2 px-1">
+                {THEMES.map((item) => (
                   <button
-                    key={th.id}
+                    key={item.id}
                     type="button"
-                    onClick={() => setTheme(th.id)}
-                    className={`flex items-center gap-2.5 p-2 rounded-[2px] text-xs font-sans transition-all text-left cursor-pointer ${
-                      theme === th.id
-                        ? "border border-[var(--primary-accent,#c5ff4a)] bg-[#161616] text-[#FFFFFF]"
-                        : "border border-[#252525] hover:border-[#313131] text-[#7a7a7a]"
+                    onClick={() => setTheme(item.id)}
+                    className={`size-6 rounded-[4px] transition-all cursor-pointer ${item.colorClass} ${
+                      theme === item.id
+                        ? "scale-110 ring-2 ring-offset-2 ring-[#c5ff4a] ring-offset-[#121212] shadow-sm"
+                        : "opacity-60 hover:opacity-100 hover:scale-105"
+                    }`}
+                    title={item.name}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Language Selection */}
+            <div className="border-t border-[#262626] pt-3">
+              <p className="text-[11px] font-sans font-medium text-[#737373] mb-2 uppercase tracking-wider">
+                {t.language || "Idioma"}
+              </p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {LOCALES.map((l) => (
+                  <button
+                    key={l.id}
+                    type="button"
+                    onClick={() => setLocale(l.id)}
+                    className={`flex items-center justify-between px-3 py-2 min-h-[38px] rounded-[4px] text-xs transition-all cursor-pointer ${
+                      locale === l.id
+                        ? "bg-[#c5ff4a] text-black font-semibold shadow-xs"
+                        : "text-[#a3a3a3] hover:text-white hover:bg-[#1a1a1a] border border-[#262626]"
                     }`}
                   >
-                    <span
-                      className="size-3 rounded-full shrink-0 shadow-none ring-1 ring-white/10"
-                      style={{ backgroundColor: th.hex }}
-                    />
-                    <span className="truncate">{th.name.replace(/Cyber |Electric |Neon |Forest /g, "")}</span>
+                    <span>{l.label}</span>
+                    <span className="font-mono text-[10px] opacity-75">{l.id.toUpperCase()}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Language */}
-            <div>
-              <p className="text-[10px] font-sans font-medium uppercase tracking-[0.22em] text-[#7a7a7a] mb-2">
-                {t.language}
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                {LOCALES.map((loc) => (
-                  <button
-                    key={loc.id}
-                    type="button"
-                    onClick={() => setLocale(loc.id)}
-                    className={`flex items-center gap-2 p-2 rounded-[2px] text-xs font-sans transition-all text-left cursor-pointer ${
-                      locale === loc.id
-                        ? "border border-[var(--primary-accent,#c5ff4a)] bg-[#161616] text-[#FFFFFF]"
-                        : "border border-[#252525] hover:border-[#313131] text-[#7a7a7a]"
-                    }`}
-                  >
-                    <span className="text-base leading-none">{loc.flag}</span>
-                    <span className="truncate">{loc.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Tactile Sound Feedback Toggle */}
-            <div className="border-t border-[#252525] pt-3">
+            {/* Tactile Sound FX Toggle */}
+            <div className="border-t border-[#262626] pt-3">
               <div className="flex items-center justify-between mb-2">
-                <p className="text-[10px] font-sans font-medium uppercase tracking-[0.22em] text-[#7a7a7a]">
+                <p className="text-[11px] font-sans font-medium text-[#737373] uppercase tracking-wider">
                   {t.soundLabel || "Sonido Táctil"}
                 </p>
-                <span className="text-[10px] font-mono font-medium text-[var(--primary-accent,#c5ff4a)]">
+                <span className="text-[11px] font-mono text-[#c5ff4a] font-semibold">
                   {sound ? (t.soundOn || "ON") : (t.soundOff || "OFF")}
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-1.5 p-1 rounded-[4px] bg-[#161616] border border-[#252525]">
+              <div className="grid grid-cols-2 gap-1.5 p-1 rounded-[6px] bg-[#0a0a0a] border border-[#262626]">
                 <button
                   type="button"
                   onClick={() => setSound(true)}
-                  className={`flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-[2px] text-xs font-sans font-medium transition-all cursor-pointer ${
+                  className={`flex items-center justify-center gap-1.5 py-2 px-3 min-h-[38px] rounded-[4px] text-xs font-semibold transition-all cursor-pointer ${
                     sound
-                      ? "bg-[var(--primary-accent,#c5ff4a)] text-[#000000] shadow-none"
-                      : "text-[#7a7a7a] hover:text-[#FFFFFF]"
+                      ? "bg-[#c5ff4a] text-black shadow-xs font-bold"
+                      : "text-[#a3a3a3] hover:text-white hover:bg-[#1a1a1a]"
                   }`}
                 >
                   <span>🔊</span>
@@ -201,10 +201,10 @@ export function PreferencesControls() {
                 <button
                   type="button"
                   onClick={() => setSound(false)}
-                  className={`flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-[2px] text-xs font-sans font-medium transition-all cursor-pointer ${
+                  className={`flex items-center justify-center gap-1.5 py-2 px-3 min-h-[38px] rounded-[4px] text-xs font-semibold transition-all cursor-pointer ${
                     !sound
-                      ? "bg-[var(--primary-accent,#c5ff4a)] text-[#000000] shadow-none"
-                      : "text-[#7a7a7a] hover:text-[#FFFFFF]"
+                      ? "bg-[#c5ff4a] text-black shadow-xs font-bold"
+                      : "text-[#a3a3a3] hover:text-white hover:bg-[#1a1a1a]"
                   }`}
                 >
                   <span>🔇</span>

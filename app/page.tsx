@@ -5,6 +5,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { Navbar } from "@/components/Navbar";
 import { BudgetSummaryCard } from "@/components/BudgetSummaryCard";
+import { FinancialMetricsSection } from "@/components/FinancialMetricsSection";
 import { CategoryDistributionBar } from "@/components/CategoryDistributionBar";
 import { FixedBillsSection } from "@/components/FixedBillsSection";
 import { SubscriptionsSection } from "@/components/SubscriptionsSection";
@@ -336,7 +337,21 @@ export default function DashboardPage() {
           onOpenRollover={() => setIsRolloverModalOpen(true)}
         />
 
-        {/* 2. Category Distribution Bar */}
+        {/* 2. Financial Analytics, Metrics & Charts (No Donuts) */}
+        <FinancialMetricsSection
+          monthlyNetIncome={budget.monthlyNetIncome}
+          totalExtraIncome={totalExtra}
+          fixedTotal={fixedTotal}
+          subsTotal={subsTotal}
+          leisureTotal={leisureTotal}
+          microTotal={microTotal}
+          disposableBalance={disposableBalance}
+          currency={budget.currency}
+          subsCount={subscriptions.length}
+          fixedCount={fixedBills.length}
+        />
+
+        {/* 3. Category Distribution Bar */}
         <CategoryDistributionBar
           fixedTotal={fixedTotal}
           subsTotal={subsTotal}
